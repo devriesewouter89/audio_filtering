@@ -3,25 +3,22 @@
 
 ## Installation
 
-Download to your project directory, add `README.md`, and commit:
+Download to your project directory, add, and commit:
 
 ```sh
-git add README.md
-git commit -m "Use README "
+git add -A
+git commit -m "<changes>"
 ```
 
 ## Usage
 
-Best Practices 
+Classify some dogs, why not?
 
-* Name
-* Description
-* Installation instructions
-* Usage instructions
-* Support instructions
-* Contributing instructions
+* Hate your neighbor's dog?
+* Want some peace and quiet?
 
 
+We have a legal (and resonable) solution
 ## Support
 
 Please [open an issue](https://github.com/neale/audio_filtering/issues/new) for support.
