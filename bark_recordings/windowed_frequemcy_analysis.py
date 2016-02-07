@@ -84,7 +84,7 @@ def main():
   drawid = fig.canvas.mpl_connect('draw_event', change_xlabel)
 
   MAX_y = 2.0 ** (SAMPLE_SIZE * 8 - 1)
-  wf = wave.open('30_yards_1.wav', 'rb')
+  wf = wave.open('30_yards_bark_cut_2.wav', 'rb')
   assert wf.getnchannels() == CHANNELS
   assert wf.getsampwidth() == SAMPLE_SIZE
   assert wf.getframerate() == RATE
@@ -95,7 +95,7 @@ def main():
     init_func=lambda: init(line), fargs=(line, wf, MAX_y),
     interval=500.0 / FPS, blit=True
   )
-  ani.save('30_yards_window.mp4', fps=FPS)
+  ani.save('30_yards_isolated_1.mp4', fps=FPS)
   #plt.show()
   wf.close()
 

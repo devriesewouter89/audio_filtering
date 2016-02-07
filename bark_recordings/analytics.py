@@ -24,7 +24,7 @@ def plotSpectrum(y,Fs):
     print "returning plot"
 
 Fs = 44100;  # sampling r
-x, fs, bits=audiolab.wavread('150_yards.wav')
+x, fs, bits=audiolab.wavread('30_yards_bark_cut_3.wav')
 y = x[:,1]
 lungime=len(y)
 timp=len(y)/44100.
