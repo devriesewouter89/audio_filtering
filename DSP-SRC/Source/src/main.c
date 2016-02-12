@@ -71,8 +71,17 @@ int USART1_read_index = 0;
 
 int main(void)
 {
-	data_struct data_points = { 0 };
 	int x;
+	data_struct data_points;
+	char buffer[20];
+	
+	data_points.data[0] = 13371337;
+  data_points.data[1] = 44514451;
+  data_points.data[2] = 15671567;
+  data_points.data[3] = 10981098;
+  data_points.data[4] = 00000001;
+  data_points.data[5] = 33343334;
+	data_points.data[6] = 0;
 	GPIOInitialize();
 	UART_Initialize();
 	NVICInitialize();
@@ -92,14 +101,16 @@ int main(void)
 
   /* Initialize User Button */
   STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_EXTI);
-  //WavePlayBack(I2S_AudioFreq_48k); //Contains Main program loop
+  WavePlayBack(I2S_AudioFreq_48k); //Contains Main program loop
 	
 	while(1)
 	{
-		if(USART1_valid_line){
+	/*	if(USART1_valid_line){
 			if( strstr((const char *)USART1_gets,"GET") ){
-				for(x = 0; x < 500; x++){
-					USART_put_data(data_points.data[x]);
+				for(x = 0; x < 7; x++){
+					snprintf(buffer, 20, "%u,\n", data_points.data[x]);
+					USART_puts(buffer);
+					
 				}
 				USART_puts("ENDDATA\n");
 			} 
@@ -111,7 +122,7 @@ int main(void)
 			}
 			USART1_valid_line = 0;
 		}
-	}
+	}*/
 }
 
 #ifdef USE_FULL_ASSERT

@@ -1,5 +1,5 @@
 Dependencies for Project 'Audio-DSP', Target 'Audio-DSP': (DO NOT MODIFY !)
-F (..\src\main.c)(0x56BAD66D)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -O3 -Otime --apcs=interwork --split_sections -I..\inc -I..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\Libraries\CMSIS\Include -I..\..\Utilities\Third_Party\fat_fs\inc -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\Libraries\STM32_USB_HOST_Library\Core\inc -I..\..\Libraries\STM32_USB_HOST_Library\Class\MSC\inc -I..\..\Libraries\STM32_USB_OTG_Driver\inc -I..\..\Utilities\STM32F4-Discovery-I "C:\Users\TekBots 2\audio_filtering\DSP-SRC\Source\MDK-ARM\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0-D__UVISION_VERSION="517" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F4XX-o .\audio-dsp\main.o --omf_browse .\audio-dsp\main.crf --depend .\audio-dsp\main.d)
+F (..\src\main.c)(0x56BD5A1D)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -O3 -Otime --apcs=interwork --split_sections -I..\inc -I..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\Libraries\CMSIS\Include -I..\..\Utilities\Third_Party\fat_fs\inc -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\Libraries\STM32_USB_HOST_Library\Core\inc -I..\..\Libraries\STM32_USB_HOST_Library\Class\MSC\inc -I..\..\Libraries\STM32_USB_OTG_Driver\inc -I..\..\Utilities\STM32F4-Discovery-I "C:\Users\TekBots 2\audio_filtering\DSP-SRC\Source\MDK-ARM\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0-D__UVISION_VERSION="517" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F4XX-o .\audio-dsp\main.o --omf_browse .\audio-dsp\main.crf --depend .\audio-dsp\main.d)
 I (..\inc\main.h)(0x56BAD66F)
 I (..\..\Libraries\CMSIS\ST\STM32F4xx\Include\stm32f4xx.h)(0x56A7D662)
 I (..\..\Libraries\CMSIS\Include\core_cm4.h)(0x5699A58A)
@@ -43,7 +43,7 @@ I (..\inc\headphone.h)(0x56A68614)
 I (..\inc\microphone.h)(0x56A68617)
 I (..\inc\dsp.h)(0x56A6B2E9)
 I (..\..\Utilities\STM32F4-Discovery\pdm_filter.h)(0x5699A58B)
-I (..\inc\gui_interface_communications.h)(0x56BAD66F)
+I (..\inc\gui_interface_communications.h)(0x56BBFA72)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x55DBFE68)
 F (..\src\stm32f4xx_it.c)(0x56B95250)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -O3 -Otime --apcs=interwork --split_sections -I..\inc -I..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\Libraries\CMSIS\Include -I..\..\Utilities\Third_Party\fat_fs\inc -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\Libraries\STM32_USB_HOST_Library\Core\inc -I..\..\Libraries\STM32_USB_HOST_Library\Class\MSC\inc -I..\..\Libraries\STM32_USB_OTG_Driver\inc -I..\..\Utilities\STM32F4-Discovery-I "C:\Users\TekBots 2\audio_filtering\DSP-SRC\Source\MDK-ARM\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0-D__UVISION_VERSION="517" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F4XX-o .\audio-dsp\stm32f4xx_it.o --omf_browse .\audio-dsp\stm32f4xx_it.crf --depend .\audio-dsp\stm32f4xx_it.d)
 I (..\inc\main.h)(0x56BAD66F)
@@ -89,7 +89,7 @@ I (..\inc\headphone.h)(0x56A68614)
 I (..\inc\microphone.h)(0x56A68617)
 I (..\inc\dsp.h)(0x56A6B2E9)
 I (..\..\Utilities\STM32F4-Discovery\pdm_filter.h)(0x5699A58B)
-I (..\inc\gui_interface_communications.h)(0x56BAD66F)
+I (..\inc\gui_interface_communications.h)(0x56BBFA72)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x55DBFE68)
 F (..\src\system_stm32f4xx.c)(0x5699A58B)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -O3 -Otime --apcs=interwork --split_sections -I..\inc -I..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\Libraries\CMSIS\Include -I..\..\Utilities\Third_Party\fat_fs\inc -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\Libraries\STM32_USB_HOST_Library\Core\inc -I..\..\Libraries\STM32_USB_HOST_Library\Class\MSC\inc -I..\..\Libraries\STM32_USB_OTG_Driver\inc -I..\..\Utilities\STM32F4-Discovery-I "C:\Users\TekBots 2\audio_filtering\DSP-SRC\Source\MDK-ARM\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0-D__UVISION_VERSION="517" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F4XX-o .\audio-dsp\system_stm32f4xx.o --omf_browse .\audio-dsp\system_stm32f4xx.crf --depend .\audio-dsp\system_stm32f4xx.d)
 I (..\..\Libraries\CMSIS\ST\STM32F4xx\Include\stm32f4xx.h)(0x56A7D662)
@@ -170,7 +170,7 @@ I (..\inc\headphone.h)(0x56A68614)
 I (..\inc\microphone.h)(0x56A68617)
 I (..\inc\dsp.h)(0x56A6B2E9)
 I (..\..\Utilities\STM32F4-Discovery\pdm_filter.h)(0x5699A58B)
-I (..\inc\gui_interface_communications.h)(0x56BAD66F)
+I (..\inc\gui_interface_communications.h)(0x56BBFA72)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x55DBFE68)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x55DBFE68)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x55DBFE6E)
@@ -218,7 +218,7 @@ I (..\inc\headphone.h)(0x56A68614)
 I (..\inc\microphone.h)(0x56A68617)
 I (..\inc\dsp.h)(0x56A6B2E9)
 I (..\..\Utilities\STM32F4-Discovery\pdm_filter.h)(0x5699A58B)
-I (..\inc\gui_interface_communications.h)(0x56BAD66F)
+I (..\inc\gui_interface_communications.h)(0x56BBFA72)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x55DBFE68)
 F (..\src\dsp.c)(0x56B173C5)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -O3 -Otime --apcs=interwork --split_sections -I..\inc -I..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\Libraries\CMSIS\Include -I..\..\Utilities\Third_Party\fat_fs\inc -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\Libraries\STM32_USB_HOST_Library\Core\inc -I..\..\Libraries\STM32_USB_HOST_Library\Class\MSC\inc -I..\..\Libraries\STM32_USB_OTG_Driver\inc -I..\..\Utilities\STM32F4-Discovery-I "C:\Users\TekBots 2\audio_filtering\DSP-SRC\Source\MDK-ARM\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0-D__UVISION_VERSION="517" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F4XX-o .\audio-dsp\dsp.o --omf_browse .\audio-dsp\dsp.crf --depend .\audio-dsp\dsp.d)
 I (..\inc\dsp.h)(0x56A6B2E9)
@@ -304,7 +304,7 @@ I (..\inc\headphone.h)(0x56A68614)
 I (..\inc\microphone.h)(0x56A68617)
 I (..\inc\dsp.h)(0x56A6B2E9)
 I (..\..\Utilities\STM32F4-Discovery\pdm_filter.h)(0x5699A58B)
-I (..\inc\gui_interface_communications.h)(0x56BAD66F)
+I (..\inc\gui_interface_communications.h)(0x56BBFA72)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x55DBFE68)
 F (..\..\Utilities\STM32F4-Discovery\stm32f4_discovery.c)(0x5699A58B)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -O3 -Otime --apcs=interwork --split_sections -I..\inc -I..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\Libraries\CMSIS\Include -I..\..\Utilities\Third_Party\fat_fs\inc -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\Libraries\STM32_USB_HOST_Library\Core\inc -I..\..\Libraries\STM32_USB_HOST_Library\Class\MSC\inc -I..\..\Libraries\STM32_USB_OTG_Driver\inc -I..\..\Utilities\STM32F4-Discovery-I "C:\Users\TekBots 2\audio_filtering\DSP-SRC\Source\MDK-ARM\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0-D__UVISION_VERSION="517" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F4XX-o .\audio-dsp\stm32f4_discovery.o --omf_browse .\audio-dsp\stm32f4_discovery.crf --depend .\audio-dsp\stm32f4_discovery.d)
 I (..\..\Utilities\STM32F4-Discovery\stm32f4_discovery.h)(0x5699A58B)
