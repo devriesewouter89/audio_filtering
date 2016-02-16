@@ -21,6 +21,7 @@ void USART_put_data(uint8_t data)
   while( !(USART1->SR & 0x00000040) );
   USART_SendData(USART1, data);
 }
+
 //stm32f4xx_it.c
 			//if( strcmp((const char *)USART1_gets,"GET") ){
 			//		USART_puts("EXAMPLEDATA1,EXAMPLEDATA2,EXAMPLEDATA3,EXAMPLEDATA4\0");

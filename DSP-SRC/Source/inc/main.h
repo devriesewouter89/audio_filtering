@@ -14,4 +14,5 @@
 #include "pdm_filter.h"
 #include "gui_interface_communications.h"
 #include <string.h>
+#include <inttypes.h>
 #endif

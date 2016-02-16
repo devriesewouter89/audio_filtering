@@ -22,17 +22,17 @@ Dialog DLL:      TCM.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Users\TekBots 2\audio_filtering\DSP-SRC\Source\MDK-ARM\Audio-DSP.uvprojx
-Project File Date:  02/09/2016
+Project File Date:  02/15/2016
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Audio-DSP'
-compiling stm32f4xx_rcc.c...
-"no source": Error:  #5: cannot open source input file "..\..\..\..\stm32f4_dsp_stdperiph_lib\STM32F4xx_DSP_StdPeriph_Lib_V1.6.1\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c": No such file or directory
-..\..\..\..\stm32f4_dsp_stdperiph_lib\STM32F4xx_DSP_StdPeriph_Lib_V1.6.1\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c: 0 warnings, 1 error
 compiling stm32f4xx_usart.c...
 "no source": Error:  #5: cannot open source input file "..\..\..\..\stm32f4_dsp_stdperiph_lib\STM32F4xx_DSP_StdPeriph_Lib_V1.6.1\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.c": No such file or directory
 ..\..\..\..\stm32f4_dsp_stdperiph_lib\STM32F4xx_DSP_StdPeriph_Lib_V1.6.1\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.c: 0 warnings, 1 error
+compiling stm32f4xx_rcc.c...
+"no source": Error:  #5: cannot open source input file "..\..\..\..\stm32f4_dsp_stdperiph_lib\STM32F4xx_DSP_StdPeriph_Lib_V1.6.1\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c": No such file or directory
+..\..\..\..\stm32f4_dsp_stdperiph_lib\STM32F4xx_DSP_StdPeriph_Lib_V1.6.1\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c: 0 warnings, 1 error
 compiling main.c...
 ..\..\Libraries\CMSIS\ST\STM32F4xx\Include\stm32f4xx.h(9979): warning:  #1-D: last line of file ends without a newline
   /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
@@ -40,23 +40,17 @@ compiling main.c...
   /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 ..\inc\gui_interface_communications.h(9): warning:  #1-D: last line of file ends without a newline
   void USART_put_data(uint8_t data);
-..\src\main.c(74): warning:  #177-D: variable "x" was declared but never referenced
-  	int x;
-..\src\main.c(75): warning:  #550-D: variable "data_points" was set but never used
-  	data_struct data_points;
-..\src\main.c(76): warning:  #177-D: variable "buffer" was declared but never referenced
-  	char buffer[20];
-..\src\main.c(136): error: At end of source:  #67: expected a "}"
-..\src\main.c: 6 warnings, 1 error
-".\Audio-DSP\Audio-DSP.axf" - 1 Error(s), 6 Warning(s).
+..\src\main.c: 3 warnings, 0 errors
+linking...
+Program Size: Code=9160 RO-data=460 RW-data=948 ZI-data=8508  
+".\Audio-DSP\Audio-DSP.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   C:\Users\TekBots 2\audio_filtering\DSP-SRC\Source\MDK-ARM\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Target not created.
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

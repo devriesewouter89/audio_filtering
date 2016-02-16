@@ -73,15 +73,23 @@ int main(void)
 {
 	int x;
 	data_struct data_points;
-	char buffer[20];
+	char buffer[25];
 	
-	data_points.data[0] = 13371337;
-  data_points.data[1] = 44514451;
-  data_points.data[2] = 15671567;
-  data_points.data[3] = 10981098;
-  data_points.data[4] = 00000001;
-  data_points.data[5] = 33343334;
-	data_points.data[6] = 0;
+	data_points.data[0]  = 0;
+  data_points.data[1]  = 1;
+  data_points.data[2]  = 1000;
+  data_points.data[3]  = 10019990;
+  data_points.data[4]  = 11200112;
+  data_points.data[5]  = 12312300;
+	data_points.data[6]  = 13371337;
+	data_points.data[7]  = 13371370;
+  data_points.data[8]  = 13389000;
+  data_points.data[9]  = 14120123;
+  data_points.data[10] = 14372690;
+  data_points.data[11] = 31231231;
+  data_points.data[12] = 42312310;
+	data_points.data[13] = 43215123;
+	data_points.data[499]= 46120312;
 	GPIOInitialize();
 	UART_Initialize();
 	NVICInitialize();
@@ -101,16 +109,15 @@ int main(void)
 
   /* Initialize User Button */
   STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_EXTI);
-  WavePlayBack(I2S_AudioFreq_48k); //Contains Main program loop
+  //WavePlayBack(I2S_AudioFreq_48k); //Contains Main program loop
 	
 	while(1)
 	{
-	/*	if(USART1_valid_line){
+	  if(USART1_valid_line){
 			if( strstr((const char *)USART1_gets,"GET") ){
-				for(x = 0; x < 7; x++){
-					snprintf(buffer, 20, "%u,\n", data_points.data[x]);
+				for(x = 0; x < 500; x++){
+					snprintf(buffer, 25, "%"PRIu64"0000000,\n", data_points.data[x]);
 					USART_puts(buffer);
-					
 				}
 				USART_puts("ENDDATA\n");
 			} 
@@ -122,7 +129,7 @@ int main(void)
 			}
 			USART1_valid_line = 0;
 		}
-	}*/
+	}
 }
 
 #ifdef USE_FULL_ASSERT
