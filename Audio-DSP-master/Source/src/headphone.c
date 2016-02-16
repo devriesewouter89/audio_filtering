@@ -39,7 +39,7 @@ void WaveRecorderCallback (int16_t *buffer, int num_samples)
         int16_t sample = *buffer++;
         if (sample >= 32700 || sample <= -32700)
             clip = 1;
-        micbuff [mic_head + i] = sample;
+        micbuff[mic_head + i] = sample;
     }    
     mic_head = (mic_head + num_samples >= MIC_BUFFER_SAMPLES) ? 0 : mic_head + num_samples;
     if (clip_timer) {

@@ -1,11 +1,4 @@
-/**
- * @file         microphone.c
- * @version      1.0
- * @date         2015
- * @author       Christoph Lauer
- * @compiler     armcc
- * @copyright    Christoph Lauer engineering
- */
+
  
 #include "main.h"
 #include "pdm_filter.h"
@@ -64,7 +57,7 @@ uint32_t WaveRecorderInit(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
     RCC->AHB1ENR |= RCC_AHB1ENR_CRCEN;
     
     /* Filter LP & HP Init */
-    Filter.LP_HZ = 900;
+    Filter.LP_HZ = 22000;
     Filter.HP_HZ = 0;
     Filter.Fs = 16000;
     Filter.Out_MicChannels = 1;

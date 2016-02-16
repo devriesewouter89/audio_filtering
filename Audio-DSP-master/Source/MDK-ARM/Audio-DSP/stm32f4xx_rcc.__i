@@ -1,7 +1,0 @@
--c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -O3 -Otime --apcs=interwork --split_sections -I..\inc -I..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\Libraries\CMSIS\Include -I..\..\Utilities\Third_Party\fat_fs\inc -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\Libraries\STM32_USB_HOST_Library\Core\inc -I..\..\Libraries\STM32_USB_HOST_Library\Class\MSC\inc -I..\..\Libraries\STM32_USB_OTG_Driver\inc -I..\..\Utilities\STM32F4-Discovery
--I "C:\Users\TekBots 2\audio_filtering\Audio-DSP-master\Source\MDK-ARM\RTE"
--I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
--I C:\Keil_v5\ARM\CMSIS\Include
--I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0
--D__UVISION_VERSION="517" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F4XX
--o .\audio-dsp\stm32f4xx_rcc.o --omf_browse .\audio-dsp\stm32f4xx_rcc.crf --depend .\audio-dsp\stm32f4xx_rcc.d "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c"

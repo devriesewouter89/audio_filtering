@@ -90,13 +90,13 @@ int main(void)
 
   /* Initialize User Button */
   STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_EXTI);
-	USART_puts("Hello Taptap.\n\0");
+	//USART_puts("Hello Taptap.\n\0");
 	
-  //WavePlayBack(I2S_AudioFreq_48k); //Contains Main program loop
+  WavePlayBack(I2S_AudioFreq_48k); //Contains Main program loop
 	while(1)
 	{ 
-		for(x = 0; x < 1000000; x++);
-		USART_puts(USART1_gets);
+		//for(x = 0; x < 1000000; x++);
+		//USART_puts(USART1_gets);
 	}
 }
 

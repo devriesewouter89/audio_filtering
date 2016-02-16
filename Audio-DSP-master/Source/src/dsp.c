@@ -4,6 +4,7 @@
 
 // arm cmsis library includes
 #define ARM_MATH_CM4
+
 #include "stm32f4xx.h"
 #include <arm_math.h>
 //#include "uart.h"
@@ -90,7 +91,7 @@ void initFilter()
 {
   // apply the band pass filter
   if (user_mode & 1)
-    arm_fir_init_q15(&FIR, NUM_FIR_TAPS, fir_coeffs_bp, fir_state, BLOCKSIZE);
+    arm_fir_init_q15(&FIR, NUM_FIR_TAPS, fir_bp_475_575, fir_state, BLOCKSIZE);
 		
   // or applay the high pass filter depending on the user button switch mode
   if (user_mode & 2)
