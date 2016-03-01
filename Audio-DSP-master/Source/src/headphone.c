@@ -21,6 +21,8 @@ extern volatile int user_mode;
 #define SAMPLE_RATE 16000        // sampling rate
 #define OUT_BUFFER_SAMPLES 1024  // number of samples per output ping-pong buffer
 #define MIC_BUFFER_SAMPLES (OUT_BUFFER_SAMPLES * 3 / 2)
+//Takes an index, an offset and an array number. If index and offset cause us to go below 0 then this returns the max minus the 
+#define WRAP_BUFFER( index, i, num_samples ) ( index + i < 0 ? num_samples - (index - i) : index - i)
 
 static int16_t buff0 [OUT_BUFFER_SAMPLES], buff1 [OUT_BUFFER_SAMPLES], micbuff [MIC_BUFFER_SAMPLES];
 static volatile uint16_t mic_head, mic_tail;    // head and tail indices to mic buffer
@@ -35,10 +37,13 @@ void WaveRecorderCallback (int16_t *buffer, int num_samples)
     static int clip_timer;
     int clip = 0, i;
 
-    for (i = 0; i < num_samples; ++i) {
-        int16_t sample = *buffer++;
-        if (sample >= 32700 || sample <= -32700)
-            clip = 1;
+		//1520 is about 0.095 seconds of samples at 16000 samples a second.
+		//I checked audacity and this is about the timespan between silence and the peak of a bark.
+		int16_t silence = buffer[WRAP_BUFFER(mic_head, 1520, num_samples)]; //Get sample from 0.95 seconds ago. Wrap around if that happens to be on the other end.
+    for (i = -1520; i < 0; i++){ // Now that we have our silence, check the preceding 0.095 seconds of samples.
+				int16_t sample = buffer[WRAP_BUFFER(mic_head, i, num_samples)];
+        if (abs(sample)-abs(silence) > 200) //What I'm doing here is calculate the delta between the sample and my reference point. I'm interested in large differences.
+					clip = 1;
         micbuff[mic_head + i] = sample;
     }    
     mic_head = (mic_head + num_samples >= MIC_BUFFER_SAMPLES) ? 0 : mic_head + num_samples;
@@ -49,7 +54,7 @@ void WaveRecorderCallback (int16_t *buffer, int num_samples)
     else if (clip)
         STM_EVAL_LEDOn(LED5);
     if (clip)
-        clip_timer = 50;
+        clip_timer = 500;
 }
 
 void WavePlayBack(uint32_t AudioFreq)

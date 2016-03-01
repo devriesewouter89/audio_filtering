@@ -57,8 +57,8 @@ uint32_t WaveRecorderInit(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
     RCC->AHB1ENR |= RCC_AHB1ENR_CRCEN;
     
     /* Filter LP & HP Init */
-    Filter.LP_HZ = 22000;
-    Filter.HP_HZ = 0;
+    Filter.LP_HZ = 5000;
+    Filter.HP_HZ = 1000;
     Filter.Fs = 16000;
     Filter.Out_MicChannels = 1;
     Filter.In_MicChannels = 1;

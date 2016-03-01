@@ -84,6 +84,22 @@ void dsp(int16_t* buffer, int length)
   	// copy the result
 	  arm_copy_q15(outSignal, buffer, length);
   }
+	if (user_mode & 2)
+	{
+	  // we initiate the filter only if needed to prevent clitches at the beginning of new buffers
+		if (firstStart == false || old_user_mode != user_mode)
+		{
+			initFilter();
+			old_user_mode = user_mode;
+			firstStart = true;
+		}
+		
+  	// process with FIR
+	  arm_fir_fast_q15(&FIR, buffer, outSignal, BLOCKSIZE);
+		
+  	// copy the result
+	  arm_copy_q15(outSignal, buffer, length);
+  }
 }
 
 // we initialize and switch the filter here
