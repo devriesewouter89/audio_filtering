@@ -122,7 +122,8 @@
 
 /* Alias word address of BRE bit */
 #define BRE_BitNumber            0x09
-#define CSR_BRE_BB              (PERIPH_BB_BASE + (CSR_OFFSET * 32) + (BRE_BitNumber * 4))
+#define CSR_BRE_BB              (PERIPH_BB_BASE + ((PWR_OFFSET + 0x04) * 32) + (BRE_BitNumber * 4))
+//(PERIPH_BB_BASE + (CSR_OFFSET * 32) + (BRE_BitNumber * 4))
 
 /* ------------------ PWR registers bit mask ------------------------ */
 

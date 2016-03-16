@@ -1,6 +1,9 @@
 #include "main.h"
 //#include "gui_interface_communications.c"
 
+char buf[50], buf2[50];
+TM_RTC_Time_t datatime;
+
 RCC_ClocksTypeDef RCC_Clocks;
 extern volatile uint8_t LED_Toggle;
 volatile int user_mode;
@@ -55,19 +58,74 @@ void GPIOInitialize(void)
  
 void NVICInitialize(void)
 {
- NVIC_InitTypeDef NVIC_InitStructure;
- NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
- NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
- NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
- NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
- 
- NVIC_Init(&NVIC_InitStructure);
- USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+  NVIC_InitTypeDef NVIC_InitStructure;
+  NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+  USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+
+	/*
+	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_Init(&NVIC_InitStructure);
+	*/
 }
 
+void TIMER_setup( void )
+{
+
+	TM_RTC_Init(TM_RTC_ClockSource_Internal);
+	TM_RTC_Interrupts(TM_RTC_Int_1s);
+	datatime.hours = 0;
+            datatime.minutes = 59;
+            datatime.seconds = 55;
+            datatime.year = 14;
+            datatime.month = 6;
+            datatime.date = 30;
+            datatime.day = 6;
+            //Set new time
+            TM_RTC_SetDateTime(&datatime, TM_RTC_Format_BIN);
+	
+	/*RTC_InitTypeDef RTC_InitStructure;
+	RTC_InitStructure.RTC_HourFormat = RTC_HourFormat_24;
+	RTC_InitStructure.RTC_AsynchPrediv =  ;
+	RTC_InitStructure.RTC_SynchPrediv = ;
+	
+	RTC_StructInit(&RTC_InitStructure);
+	RTC_WriteProtectionCmd(DISABLE);
+	RTC_Init(&RTC_InitStructure);
+	RTC_EnterInitMode();
+	RTC_ExitInitMode();
+	*/
+}
+void TM_RTC_RequestHandler() {
+    //Get time
+    TM_RTC_GetDateTime(&datatime, TM_RTC_Format_BIN);
+    
+    //Format time
+    sprintf(buf, "%02d.%02d.%04d %02d:%02d:%02d  Unix: %u\n",
+                datatime.date,
+                datatime.month,
+                datatime.year + 2000,
+                datatime.hours,
+                datatime.minutes,
+                datatime.seconds,
+                datatime.unix
+    );
+    //Send to USART
+	/* change to output to USART */
+    USART_puts(buf);
+    
+}
 volatile char USART1_gets[5] = "NOT\n";
 int USART1_valid_line = 0;
 int USART1_read_index = 0;
+int seconds = 0;
+
 
 int main(void)
 {
@@ -90,16 +148,18 @@ int main(void)
   data_points.data[12] = 42312310;
 	data_points.data[13] = 43215123;
 	data_points.data[499]= 46120312;
+
 	GPIOInitialize();
 	UART_Initialize();
 	NVICInitialize();
-	
+	TIMER_setup();
+	TM_RTC_RequestHandler();
   /* Initialize LEDs */
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
   STM_EVAL_LEDInit(LED5);
   STM_EVAL_LEDInit(LED6);
- 
+  
   /* Green Led On: start of application */
   STM_EVAL_LEDOn(LED4);
        
@@ -113,6 +173,7 @@ int main(void)
 	
 	while(1)
 	{
+		/*
 	  if(USART1_valid_line){
 			if( strstr((const char *)USART1_gets,"GET") ){
 				for(x = 0; x < 500; x++){
@@ -129,8 +190,19 @@ int main(void)
 			}
 			USART1_valid_line = 0;
 		}
+		*/
 	}
 }
+
+void TIM3_IRQHandler( void ){
+	char buffer[20];
+	memcpy(buffer, "HELLO MASTER\n\0", 20);
+	
+	seconds++;
+	//snprintf(buffer, 20, "%d\n", seconds);
+	//USART_puts(buffer);
+}
+
 
 #ifdef USE_FULL_ASSERT
  
@@ -140,4 +212,3 @@ void assert_failed(uint8_t* file, uint32_t line)
  {}
 }
 #endif
-

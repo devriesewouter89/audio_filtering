@@ -5,18 +5,19 @@ struct data_struct{
  uint8_t data[500];
 };
 */
+
 //Senior Design Functions
 void USART_puts(volatile char *s)
 {
- while(*s){
-  // wait until data register is empty
-  while( !(USART1->SR & 0x00000040) );
-  USART_SendData(USART1, *s++);
- }
+	while(*s){
+		// wait until data register is empty
+		while( !(USART1->SR & 0x00000040) );
+		USART_SendData(USART1, *s++);
+	}
 }
+
 void USART_put_data(uint8_t data)
 {
-
   // wait until data register is empty
   while( !(USART1->SR & 0x00000040) );
   USART_SendData(USART1, data);
