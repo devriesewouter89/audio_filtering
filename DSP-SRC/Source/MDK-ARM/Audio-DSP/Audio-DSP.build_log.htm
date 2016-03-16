@@ -27,31 +27,99 @@ Project File Date:  03/15/2016
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Audio-DSP'
+compiling microphone.c...
+C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h(184): error:  #5: cannot open source input file "core_cm4.h": No such file or directory
+  #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+..\src\microphone.c: 0 warnings, 1 error
+compiling headphone.c...
+C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h(184): error:  #5: cannot open source input file "core_cm4.h": No such file or directory
+  #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+..\src\headphone.c: 0 warnings, 1 error
+compiling stm32f4xx_it.c...
+C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h(184): error:  #5: cannot open source input file "core_cm4.h": No such file or directory
+  #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+..\src\stm32f4xx_it.c: 0 warnings, 1 error
+compiling system_stm32f4xx.c...
+C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h(184): error:  #5: cannot open source input file "core_cm4.h": No such file or directory
+  #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+..\src\system_stm32f4xx.c: 0 warnings, 1 error
+compiling gui_interface_communications.c...
+C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h(184): error:  #5: cannot open source input file "core_cm4.h": No such file or directory
+  #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+..\src\gui_interface_communications.c: 0 warnings, 1 error
 compiling main.c...
-..\..\Libraries\CMSIS\ST\STM32F4xx\Include\stm32f4xx.h(9979): warning:  #1-D: last line of file ends without a newline
-  /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-..\..\Libraries\CMSIS\ST\STM32F4xx\Include\stm32f4xx.h(9979): warning:  #1-D: last line of file ends without a newline
-  /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-..\inc\gui_interface_communications.h(9): warning:  #1-D: last line of file ends without a newline
-  void USART_put_data(uint8_t data);
-..\src\main.c(132): warning:  #177-D: variable "x" was declared but never referenced
-  	int x;
-..\src\main.c(133): warning:  #550-D: variable "data_points" was set but never used
-  	data_struct data_points;
-..\src\main.c(134): warning:  #177-D: variable "buffer" was declared but never referenced
-  	char buffer[25];
-..\src\main.c(214): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\src\main.c: 7 warnings, 0 errors
-linking...
-Program Size: Code=12452 RO-data=460 RW-data=1000 ZI-data=8592  
-".\Audio-DSP\Audio-DSP.axf" - 0 Error(s), 7 Warning(s).
+C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h(184): error:  #5: cannot open source input file "core_cm4.h": No such file or directory
+  #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+..\src\main.c: 0 warnings, 1 error
+compiling dsp.c...
+C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h(184): error:  #5: cannot open source input file "core_cm4.h": No such file or directory
+  #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+..\src\dsp.c: 0 warnings, 1 error
+compiling stm32f4_discovery.c...
+"no source": Error:  #5: cannot open source input file "..\..\Utilities\STM32F4-Discovery\stm32f4_discovery.c": No such file or directory
+..\..\Utilities\STM32F4-Discovery\stm32f4_discovery.c: 0 warnings, 1 error
+compiling stm32f4xx_tim.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c: 0 warnings, 1 error
+compiling stm32f4_discovery_audio_codec.c...
+"no source": Error:  #5: cannot open source input file "..\..\Utilities\STM32F4-Discovery\stm32f4_discovery_audio_codec.c": No such file or directory
+..\..\Utilities\STM32F4-Discovery\stm32f4_discovery_audio_codec.c: 0 warnings, 1 error
+compiling misc.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\misc.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\misc.c: 0 warnings, 1 error
+compiling stm32f4xx_dac.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.c: 0 warnings, 1 error
+compiling stm32f4xx_syscfg.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.c: 0 warnings, 1 error
+compiling stm32f4xx_dma.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.c: 0 warnings, 1 error
+compiling stm32f4xx_gpio.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.c: 0 warnings, 1 error
+compiling stm32f4xx_i2c.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.c: 0 warnings, 1 error
+compiling stm32f4xx_spi.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.c: 0 warnings, 1 error
+compiling stm32f4xx_exti.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.c: 0 warnings, 1 error
+compiling stm32f4xx_rcc.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c: 0 warnings, 1 error
+compiling stm32f4xx_rng.c...
+"no source": Error:  #5: cannot open source input file "..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.c": No such file or directory
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.c: 0 warnings, 1 error
+compiling stm32f4xx_usart.c...
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.c(92): error:  #5: cannot open source input file "stm32f4xx_usart.h": No such file or directory
+  #include "stm32f4xx_usart.h"
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.c: 0 warnings, 1 error
+compiling stm32f4xx_rtc.c...
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.c(285): error:  #5: cannot open source input file "stm32f4xx_rtc.h": No such file or directory
+  #include "stm32f4xx_rtc.h"
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.c: 0 warnings, 1 error
+compiling tm_stm32f4_rtc.c...
+C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h(184): error:  #5: cannot open source input file "core_cm4.h": No such file or directory
+  #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+..\src\tm_stm32f4_rtc.c: 0 warnings, 1 error
+assembling startup_stm32f4xx.s...
+startup_stm32f4xx.s: error: A1023E: File "..\..\Libraries\CMSIS\ST\STM32F4xx\Source\Templates\arm\startup_stm32f4xx.s" could not be opened: No such file or directory
+compiling stm32f4xx_pwr.c...
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.c(38): error:  #5: cannot open source input file "stm32f4xx_pwr.h": No such file or directory
+  #include "stm32f4xx_pwr.h"
+..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.c: 0 warnings, 1 error
+".\Audio-DSP\Audio-DSP.axf" - 12 Error(s), 0 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   C:\Users\TekBots 2\audio_filtering\DSP-SRC\Source\MDK-ARM\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
+Target not created.
 Build Time Elapsed:  00:00:00
 </pre>
 </body>
