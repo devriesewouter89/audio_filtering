@@ -32,7 +32,7 @@ static volatile uint8_t next_buff;              // next output buffer to write
 static void fill_init (void);
 static void fill_buffer (int16_t *buffer, int num_samples);
 
-void WaveRecorderCallback (int16_t *buffer, int num_samples)
+/*void WaveRecorderCallback (int16_t *buffer, int num_samples)
 {
     static int clip_timer;
     int clip = 0, i;
@@ -55,6 +55,37 @@ void WaveRecorderCallback (int16_t *buffer, int num_samples)
         STM_EVAL_LEDOn(LED5);
     if (clip)
         clip_timer = 500;
+}*/
+void WaveRecorderCallback (int16_t *buffer, int num_samples)
+{
+    static int clip_timer;
+    int clip = 0, i;
+		if (user_mode & 1) {
+			
+			for (i = 0; i < num_samples; ++i) {
+					int16_t sample = *buffer++;
+					if (sample < 4000 && sample > 3000)// || sample = -20000)
+							clip = 1;
+					micbuff [mic_head + i] = sample;
+			}  
+		} else {
+			
+			for (i = 0; i < num_samples; ++i) {
+					int16_t sample = *buffer++;
+					if ((sample >= 32000) || (sample <= -32000)) 
+							clip = 1;
+					micbuff [mic_head + i] = sample;
+			}    
+		}
+    mic_head = (mic_head + num_samples >= MIC_BUFFER_SAMPLES) ? 0 : mic_head + num_samples;
+    if (clip_timer) {
+        if (!--clip_timer)
+            STM_EVAL_LEDOff(LED5);
+    }
+    else if (clip)
+        STM_EVAL_LEDOn(LED5);
+    if (clip)
+        clip_timer = 50;
 }
 
 void WavePlayBack(uint32_t AudioFreq)
