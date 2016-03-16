@@ -223,4 +223,23 @@ luac.out
 *.x86_64
 *.hex
 
+# STM project settings
+*.map
+*.Tekbots\ 2
+*.uvopt
+*.uvoptx
+*.uvprojx
+*.lst
+*.axf
+*.htm
+*.lnp
+*.sct
+*.dep
+*.iex
+*.dep
+*.dgbconf
 
+stm_project/
+DSP-SRC/Utilities/
+DSP-SRC/Libraries/
+DSP-SRC/MDK-ARM/
