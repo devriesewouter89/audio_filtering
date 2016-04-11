@@ -221,10 +221,10 @@ void USART1_IRQHandler(void) {
 			//Uli Additions. One global array to hopefully pull RxByte out of the interrupt handler.
 			USART1_gets[USART1_read_index++] = RxByte;
 			if( strcmp((const char *)USART1_gets,"GET") ){
-					USART_puts("DAT");
+					//USART_puts("DAT");
 					strcpy((char *)USART1_gets, "GET");
 			} else {
-					USART_puts(USART1_gets);
+				  //USART_puts(USART1_gets);
 			}
 			
 			if(USART1_read_index >= sizeof(USART1_gets))
