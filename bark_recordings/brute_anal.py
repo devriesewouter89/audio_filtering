@@ -2,7 +2,7 @@ import glob
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-import wave
+from scipy.io import wavfile
 import os
 import struct
 
@@ -11,19 +11,14 @@ def main():
     frequency_matches = []
 
     for f in glob.glob("./*.wav"):
-
-        wav = wave.open(f, 'rb')
-        channels = wav.getnchannels()
-        fs = wav.getframerate()
-        wavelen = wav.getnframes()
-        y_struct = wav.readframes(wavelen-1)
-        print len(y_struct)
-        y = np.array(struct.unpack("%dh" % (len(y_struct)/2), y_struct))
-        x = np.linspace(0, 1./fs * len(y), len(y))
-        y_fft = np.fft.fft(y)
+        plt.figure()
+        print "Analyzing {}\n".format(f)
+        fs, data = wavfile.read(f)
+        channel1 = data.T[0]
+        y = np.fft.fft(channel1)
         print "{} sample points".format(len(y))
-        x_fft = np.linspace(0, fs, len(y))
-        plt.plot(x_fft, np.abs(y_fft))
+        x_fft = np.linspace(0, fs/5, (len(y)/2)-1)
+        plt.plot(x_fft, (np.abs(y[:(len(y)/2)-1])))
         plt.show()
 
 

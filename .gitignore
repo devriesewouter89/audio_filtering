@@ -223,4 +223,20 @@ luac.out
 *.x86_64
 *.hex
 
+# Project Files
+*.crf
+*.d
+*.axf
+*.htm
+*.lnp
+*.sct
+*.dep
+*.iex
 
+# Top Level Project Files
+*.map
+*.uvopt
+*.Tekbots\ 2
+*.uvoptx
+*.uvprojx
+*.lst
