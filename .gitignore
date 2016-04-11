@@ -153,7 +153,6 @@ Temporary Items
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
@@ -201,7 +200,6 @@ luac.out
 *.pch
 
 # Libraries
-*.lib
 *.a
 *.la
 *.lo
