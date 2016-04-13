@@ -1,5 +1,6 @@
-//#include "uart.h"
-
+#include "stm32f4xx_usart.h"
+#include "stm32f4xx_gpio.h"
+#include "stm32f4xx_rcc.h"
 
 
 void UART_Initialize(void)
@@ -25,7 +26,7 @@ USART_InitTypeDef USART_InitStructure;
  USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
  
 USART_Init(USART1, &USART_InitStructure); // USART configuration
- USART_Cmd(USART1, ENABLE); // Enable USART
+USART_Cmd(USART1, ENABLE); // Enable USART
 }
  
 void GPIOInitialize(void)
@@ -44,7 +45,7 @@ GPIO_Init(GPIOB, &GPIO_InitStructure);
  GPIO_PinAFConfig(GPIOB, GPIO_PinSource7, GPIO_AF_USART1);//Connect PB7 to USART1_Rx
 }
  
-void NVICInitialize(void)
+/*void NVICInitialize(void)
 {
  NVIC_InitTypeDef NVIC_InitStructure;
  NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
@@ -56,7 +57,7 @@ NVIC_Init(&NVIC_InitStructure);
  USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
  
 }
- 
+ */
 void USART_puts(volatile char *s){
  
 while(*s){
