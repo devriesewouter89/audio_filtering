@@ -11,7 +11,7 @@ void NVICInitialize(void);
 
 USART_InitTypeDef USART_InitStructure;
 GPIO_InitTypeDef GPIO_InitStructure;
- 
+
 void UART_Initialize(void)
 {
 	 /* Enable peripheral clock for USART1 */
@@ -91,8 +91,8 @@ int main(void)
   /* Initialize User Button */
   STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_EXTI);
 	//USART_puts("Hello Taptap.\n\0");
-	
-  WavePlayBack(I2S_AudioFreq_48k); //Contains Main program loop
+	display_init();
+	WavePlayBack(I2S_AudioFreq_48k); //Contains Main program loop
 	while(1)
 	{ 
 		//for(x = 0; x < 1000000; x++);

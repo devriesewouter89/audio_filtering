@@ -420,13 +420,14 @@ void PWR_WakeUpPinCmd(uint32_t PWR_WakeUpPinx, FunctionalState NewState)
   *          This parameter can be: ENABLE or DISABLE.
   * @retval None
   */
-void PWR_BackupRegulatorCmd(FunctionalState NewState)
+	//Neale : this is bad
+/*void PWR_BackupRegulatorCmd(FunctionalState NewState)
 {
-  /* Check the parameters */
+  
   assert_param(IS_FUNCTIONAL_STATE(NewState));
 
   *(__IO uint32_t *) CSR_BRE_BB = (uint32_t)NewState;
-}
+}*/
 
 /**
   * @brief  Configures the main internal regulator output voltage.
