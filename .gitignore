@@ -236,3 +236,8 @@ luac.out
 *.uvoptx
 *.uvprojx
 *.lst
+/DebugConfig/*
+*.enratz
+*.dbgconf
+*.d
+*.crf
