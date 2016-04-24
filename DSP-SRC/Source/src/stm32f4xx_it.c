@@ -11,9 +11,14 @@
 
 #include "main.h"
 #include <string.h>
+/*Private Header Files*/
+#include "gui_interface_communications.h"
 
+/*Private Variables*/
 volatile uint8_t LED_Toggle;
 extern volatile int user_mode;
+extern volatile RTC_TimeTypeDef time_struct;
+
 
 /**
   * @brief   This function handles NMI exception.
@@ -218,6 +223,7 @@ void USART1_IRQHandler(void) {
 		if (USART_GetFlagStatus(USART1, USART_FLAG_RXNE))
 		{
 			RxByte = USART_ReceiveData(USART1);
+			
 			//Uli Additions. One global array to hopefully pull RxByte out of the interrupt handler.
 			USART1_gets[USART1_read_index++] = RxByte;
 			if( strcmp((const char *)USART1_gets,"GET") ){
@@ -272,6 +278,25 @@ void EXTI0_IRQHandler(void)
 {
 }*/
 
+/**
+  * @brief  This function handles RTC Alarms interrupt request.
+  * @param  None
+  * @retval None
+  */
+void RTC_Alarm_IRQHandler(void)
+{
+  if(RTC_GetITStatus(RTC_IT_ALRA) != RESET)
+  {
+		char time_buffer[50];
+		RTC_GetTime(RTC_Format_BIN, &time_struct); 
+		sprintf(time_buffer, "%02d:%02d:%02d\n", time_struct.RTC_Hours, time_struct.RTC_Minutes, time_struct.RTC_Seconds);
+		USART_puts(time_buffer);
+		
+    STM_EVAL_LEDToggle(LED3);
+    RTC_ClearITPendingBit(RTC_IT_ALRA);
+    EXTI_ClearITPendingBit(EXTI_Line17);
+  } 
+}
 
 /**
   * @}

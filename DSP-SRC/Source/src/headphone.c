@@ -4,7 +4,9 @@
 #include <string.h>
 #include <math.h>
 #include <dsp.h>
-#include "gui_interface_communications.c"
+
+//Uli Include
+#include "gui_interface_communications.h"
 
 static uint8_t volume = 100;
 extern volatile uint8_t LED_Toggle;
@@ -123,6 +125,8 @@ void WavePlayBack(uint32_t AudioFreq)
     fill_buffer (buff0, OUT_BUFFER_SAMPLES);
     while (next_buff == 0);
     fill_buffer (buff1, OUT_BUFFER_SAMPLES);
+		
+		poll_Alarm();
   }
 }
  

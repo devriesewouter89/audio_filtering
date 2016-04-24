@@ -66,9 +66,9 @@
   */
 
 #if !defined (STM32F40XX) && !defined (STM32F427X) && !defined (STM32F429X) 
-  /* #define STM32F40XX */   /*!< STM32F40xx/41xx Devices */
-  /* #define STM32F427X */   /*!< STM32F427x/437x Devices */
-   #define STM32F429X    /*!< STM32F429x/439x Devices */
+  /*#define STM32F40XX	*/ /*!< STM32F40xx/41xx Devices */
+  /* #define STM32F427X */ /*!< STM32F427x/437x Devices */
+  #define STM32F429X /*!< STM32F429x/439x Devices */
 #endif
 
 
@@ -2170,6 +2170,7 @@ typedef struct
 #define GPIOH_BASE            (AHB1PERIPH_BASE + 0x1C00)
 #define GPIOI_BASE            (AHB1PERIPH_BASE + 0x2000)
 
+/* Uli Modification: Commented out ifdefine, replace if shits still broken */
 #if defined (STM32F429X)
 #define GPIOJ_BASE            (AHB1PERIPH_BASE + 0x2400)
 #define GPIOK_BASE            (AHB1PERIPH_BASE + 0x2800)
@@ -2335,6 +2336,7 @@ typedef struct
 #define GPIOH               ((GPIO_TypeDef *) GPIOH_BASE)
 #define GPIOI               ((GPIO_TypeDef *) GPIOI_BASE)
 
+/* Uli Modification: Commented out ifdefine, replace if shits still broken */
 #if defined (STM32F429X)
 #define GPIOJ               ((GPIO_TypeDef *) GPIOJ_BASE)
 #define GPIOK               ((GPIO_TypeDef *) GPIOK_BASE)
@@ -7898,6 +7900,7 @@ typedef struct
 
 #define  RCC_PLLI2SCFGR_PLLI2SR              ((uint32_t)0x70000000)
 
+/*Uli modification: Commented out ifdefine, replace if shits still broken */
 #if defined (STM32F429X)
 /********************  Bit definition for RCC_PLLSAICFGR register  ************/
 #define  RCC_PLLSAICFGR_PLLI2SN              ((uint32_t)0x00007FC0)

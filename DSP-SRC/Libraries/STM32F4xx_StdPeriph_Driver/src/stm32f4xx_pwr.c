@@ -425,7 +425,8 @@ void PWR_BackupRegulatorCmd(FunctionalState NewState)
   /* Check the parameters */
   assert_param(IS_FUNCTIONAL_STATE(NewState));
 
-  *(__IO uint32_t *) CSR_BRE_BB = (uint32_t)NewState;
+	//Uli modification: Commented out this line because CSR_BRE_BB is not defined and I don't think I need this.
+  //*(__IO uint32_t *) CSR_BRE_BB = (uint32_t)NewState;
 }
 
 /**
