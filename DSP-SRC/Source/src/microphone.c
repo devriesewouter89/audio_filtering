@@ -1,4 +1,5 @@
 
+ 
 #include "main.h"
 #include "pdm_filter.h"
 #include "microphone.h"
@@ -187,9 +188,10 @@ static void WaveRecorder_NVIC_Init(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
 
+  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3); 
   /* Configure the SPI interrupt priority */
   NVIC_InitStructure.NVIC_IRQChannel = SPI2_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);

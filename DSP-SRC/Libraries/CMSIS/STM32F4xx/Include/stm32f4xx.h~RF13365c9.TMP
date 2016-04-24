@@ -80,14 +80,14 @@
  #error "Please select first the target STM32F4xx device used in your application (in stm32f4xx.h file)"
 #endif
 
-//#if !defined  (USE_STDPERIPH_DRIVER)
+#if !defined  (USE_STDPERIPH_DRIVER)
 /**
  * @brief Comment the line below if you will not use the peripherals drivers.
    In this case, these drivers will not be included and the application code will 
    be based on direct access to peripherals registers 
    */
-#define USE_STDPERIPH_DRIVER */
-//#endif /* USE_STDPERIPH_DRIVER */
+  /*#define USE_STDPERIPH_DRIVER */
+#endif /* USE_STDPERIPH_DRIVER */
 
 /**
  * @brief In the following line adjust the value of External High Speed oscillator (HSE)
