@@ -17,6 +17,7 @@ RCC_ClocksTypeDef RCC_Clocks;
 USART_InitTypeDef USART_InitStructure;
 GPIO_InitTypeDef GPIO_InitStructure;
 
+<<<<<<< HEAD
 /*Private Functions*/
 void UART_Initialize(void);
 void GPIOInitialize(void);
@@ -24,6 +25,8 @@ void EXTIInitialize(void);
 void NVICInitialize(void);
 void TIMER_init(void);
 
+=======
+>>>>>>> origin/stm
 void UART_Initialize(void)
 {
 	 /* Enable peripheral clock for USART1 */
@@ -209,8 +212,14 @@ int main(void)
 
   /* Initialize User Button */
   STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_EXTI);
+<<<<<<< HEAD
 	
   WavePlayBack(I2S_AudioFreq_48k); //Contains Main program loop
+=======
+	//USART_puts("Hello Taptap.\n\0");
+	display_init();
+	WavePlayBack(I2S_AudioFreq_48k); //Contains Main program loop
+>>>>>>> origin/stm
 	while(1)
 	{ 
 		/*if(RTC_GetITStatus(RTC_IT_ALRA) == SET){

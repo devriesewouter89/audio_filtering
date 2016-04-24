@@ -45,7 +45,7 @@ GPIO_Init(GPIOB, &GPIO_InitStructure);
  GPIO_PinAFConfig(GPIOB, GPIO_PinSource7, GPIO_AF_USART1);//Connect PB7 to USART1_Rx
 }
  
-/*void NVICInitialize(void)
+void NVICInitialize(void)
 {
  NVIC_InitTypeDef NVIC_InitStructure;
  NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
@@ -57,7 +57,7 @@ NVIC_Init(&NVIC_InitStructure);
  USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
  
 }
- */
+ 
 void USART_puts(volatile char *s){
  
 while(*s){

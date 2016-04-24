@@ -86,7 +86,10 @@ void WaveRecorderCallback (int16_t *buffer, int num_samples)
     }
     else if (clip)
         STM_EVAL_LEDOn(LED5);
+				TM_HD44780_Puts(0, 0, "Audio_Captured");
+
     if (clip)
+				TM_HD44780_Clear();
         clip_timer = 50;
 }
 

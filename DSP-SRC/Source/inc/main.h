@@ -13,5 +13,6 @@
 #include "dsp.h"
 #include "pdm_filter.h"
 #include "stm32f4xx_usart.h"
+#include "display.h"
 
 #endif
