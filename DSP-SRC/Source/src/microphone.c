@@ -36,7 +36,7 @@ static uint32_t InternalBufferSize = 0;
 static void WaveRecorder_GPIO_Init(void);
 static void WaveRecorder_SPI_Init(uint32_t Freq);
 static void WaveRecorder_NVIC_Init(void);
-
+uint32_t i = 0;
 void WaveRecorderBeginSampling (void)
 {
   WaveRecorderInit(32000,16, 1);
@@ -45,6 +45,7 @@ void WaveRecorderBeginSampling (void)
 
 uint32_t WaveRecorderInit(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
 { 
+	TM_HD44780_Clear();
   /* Check if the interface is already initialized */
   if (AudioRecInited)
   {
@@ -113,10 +114,10 @@ uint8_t WaveRecorderStart(uint16_t* pbuf, uint32_t size)
 
 void AUDIO_REC_SPI_IRQHANDLER(void)
 {  
-   u16 volume;
-   u16 app;
-
-  /* Check if data are available in SPI Data register */
+	u16 volume;
+	u16 app;
+	
+	/* Check if data are available in SPI Data register */
   if (SPI_GetITStatus(SPI2, SPI_I2S_IT_RXNE) != RESET)
   {
     app = SPI_I2S_ReceiveData(SPI2);

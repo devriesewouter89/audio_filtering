@@ -56,24 +56,28 @@ static void fill_buffer (int16_t *buffer, int num_samples);
     if (clip)
         clip_timer = 500;
 }*/
+char * a = "a";
+uint32_t message = 0;
 void WaveRecorderCallback (int16_t *buffer, int num_samples)
 {
+		
     static int clip_timer;
     int clip = 0, i;
 		if (user_mode & 1) {
-			
-			for (i = 0; i < num_samples; ++i) {
+			/*for (i = 0; i < num_samples; ++i) {
 					int16_t sample = *buffer++;
 					if (sample < 4000 && sample > 3000)// || sample = -20000)
 							clip = 1;
 					micbuff [mic_head + i] = sample;
 			}  
 		} else {
-			
+			*/
 			for (i = 0; i < num_samples; ++i) {
 					int16_t sample = *buffer++;
 					if ((sample >= 32000) || (sample <= -32000)) 
 							clip = 1;
+							
+							
 					micbuff [mic_head + i] = sample;
 			}    
 		}
@@ -81,13 +85,18 @@ void WaveRecorderCallback (int16_t *buffer, int num_samples)
     if (clip_timer) {
         if (!--clip_timer)
             STM_EVAL_LEDOff(LED5);
+						//if ( message == 0 ){
+						TM_HD44780_Puts(0, 0, a++);
+						//		message = 1;
+						//}
+						//message = 0;
+						//TM_HD44780_Clear();
+						
     }
     else if (clip)
         STM_EVAL_LEDOn(LED5);
-				TM_HD44780_Puts(0, 0, "Audio_Captured");
 
     if (clip)
-				TM_HD44780_Clear();
         clip_timer = 50;
 }
 
