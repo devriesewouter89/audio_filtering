@@ -11,15 +11,14 @@
 
 #include "main.h"
 #include <string.h>
-
-/* Private Includes */
+/*Private Header Files*/
 #include "gui_interface_communications.h"
 
-/* Private Variables */
+/*Private Variables*/
 volatile uint8_t LED_Toggle;
 extern volatile int user_mode;
+extern volatile RTC_TimeTypeDef time_struct;
 
-extern RTC_TimeTypeDef time_struct;
 
 /**
   * @brief   This function handles NMI exception.
@@ -203,12 +202,11 @@ void EXTI1_IRQHandler(void)
 
 //Interrupt USART Read
 //USART Variables
-extern volatile char USART1_gets[20];
+extern volatile char USART1_gets[5];
 extern int USART1_read_index;
 void USART1_IRQHandler(void) {
  
-	 static uint16_t RxByte = 0x00;
-	 static uint16_t read_index = 0;
+	 static uint16_t RxByte = 0x00; 
 	 
 	 if (USART_GetITStatus(USART1, USART_IT_TC) == SET)
 	 { 
@@ -222,16 +220,26 @@ void USART1_IRQHandler(void) {
 	 
 	 if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET)
 	 {
-		 
-		RxByte = USART_ReceiveData(USART1);
-		if( RxByte != '\n' && read_index < sizeof(USART1_gets) ){
-			USART1_gets[read_index++] = RxByte;
-		}else{
-			handle_USART_message(USART1_gets);
-			read_index = 0;
-		}
+		if (USART_GetFlagStatus(USART1, USART_FLAG_RXNE))
+		{
+			RxByte = USART_ReceiveData(USART1);
 			
-		USART_ITConfig(USART1, USART_IT_TC, ENABLE);
+			//Uli Additions. One global array to hopefully pull RxByte out of the interrupt handler.
+			USART1_gets[USART1_read_index++] = RxByte;
+			if( strcmp((const char *)USART1_gets,"GET") ){
+					//USART_puts("DAT");
+					strcpy((char *)USART1_gets, "GET");
+			} else {
+				  //USART_puts(USART1_gets);
+			}
+			
+			if(USART1_read_index >= sizeof(USART1_gets))
+			{
+					USART1_read_index = 0;
+			}
+			
+			USART_ITConfig(USART1, USART_IT_TC, ENABLE);
+		}
 		USART_ClearITPendingBit(USART1, USART_IT_RXNE);
 	 }
 }
@@ -269,27 +277,25 @@ void EXTI0_IRQHandler(void)
 /*void PPP_IRQHandler(void)
 {
 }*/
-/**
-  * @}
-  */
 
 /**
-  * @brief  This function handles RTC Alarm interrupt request.
+  * @brief  This function handles RTC Alarms interrupt request.
   * @param  None
   * @retval None
   */
 void RTC_Alarm_IRQHandler(void)
 {
-	if( RTC_GetITStatus(RTC_IT_ALRA) != RESET ){
+  if(RTC_GetITStatus(RTC_IT_ALRA) != RESET)
+  {
 		char time_buffer[50];
-		RTC_GetTime(RTC_Format_BIN, &time_struct);
+		RTC_GetTime(RTC_Format_BIN, &time_struct); 
 		sprintf(time_buffer, "%02d:%02d:%02d\n", time_struct.RTC_Hours, time_struct.RTC_Minutes, time_struct.RTC_Seconds);
 		USART_puts(time_buffer);
 		
-		STM_EVAL_LEDToggle(LED3);
-		RTC_ClearITPendingBit(RTC_IT_ALRA);
-		EXTI_ClearITPendingBit(EXTI_Line17);
-	}
+    STM_EVAL_LEDToggle(LED3);
+    RTC_ClearITPendingBit(RTC_IT_ALRA);
+    EXTI_ClearITPendingBit(EXTI_Line17);
+  } 
 }
 
 /**

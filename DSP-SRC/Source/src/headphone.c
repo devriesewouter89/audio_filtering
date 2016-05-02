@@ -4,7 +4,9 @@
 #include <string.h>
 #include <math.h>
 #include <dsp.h>
-#include "gui_interface_communications.c"
+
+//Uli Include
+#include "gui_interface_communications.h"
 
 static uint8_t volume = 100;
 extern volatile uint8_t LED_Toggle;
@@ -84,10 +86,7 @@ void WaveRecorderCallback (int16_t *buffer, int num_samples)
     }
     else if (clip)
         STM_EVAL_LEDOn(LED5);
-				TM_HD44780_Puts(0, 0, "Audio_Captured");
-
     if (clip)
-				TM_HD44780_Clear();
         clip_timer = 50;
 }
 

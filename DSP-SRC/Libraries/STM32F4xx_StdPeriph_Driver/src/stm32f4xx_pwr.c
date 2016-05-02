@@ -420,24 +420,14 @@ void PWR_WakeUpPinCmd(uint32_t PWR_WakeUpPinx, FunctionalState NewState)
   *          This parameter can be: ENABLE or DISABLE.
   * @retval None
   */
-	//Neale : this is bad
-/*void PWR_BackupRegulatorCmd(FunctionalState NewState)
+void PWR_BackupRegulatorCmd(FunctionalState NewState)
 {
-  
+  /* Check the parameters */
   assert_param(IS_FUNCTIONAL_STATE(NewState));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	//Uli modification: Commented out this line because CSR_BRE_BB is not defined and I don't think I need this.
   //*(__IO uint32_t *) CSR_BRE_BB = (uint32_t)NewState;
-=======
-  *(__IO uint32_t *) CSR_BRE_BB = (uint32_t)NewState;
->>>>>>> parent of 75e1a42... Uli RTC init and Alarm setup
 }
-=======
-  *(__IO uint32_t *) CSR_BRE_BB = (uint32_t)NewState;
-}*/
->>>>>>> origin/stm
 
 /**
   * @brief  Configures the main internal regulator output voltage.
