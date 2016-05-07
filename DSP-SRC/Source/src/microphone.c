@@ -1,20 +1,31 @@
-
- 
 #include "main.h"
 #include "pdm_filter.h"
 #include "microphone.h"
 #include "headphone.h"
 
 /* SPI Configuration defines */
+
+/* OLD PIN LAYOUT
 #define SPI_SCK_PIN                       GPIO_Pin_10
 #define SPI_SCK_GPIO_PORT                 GPIOB
-#define SPI_SCK_GPIO_CLK                  RCC_AHB1Periph_GPIOB
 #define SPI_SCK_SOURCE                    GPIO_PinSource10
-#define SPI_SCK_AF                        GPIO_AF_SPI2
 #define SPI_MOSI_PIN                      GPIO_Pin_3
 #define SPI_MOSI_GPIO_PORT                GPIOC
 #define SPI_MOSI_GPIO_CLK                 RCC_AHB1Periph_GPIOC
 #define SPI_MOSI_SOURCE                   GPIO_PinSource3
+*/
+
+/* EXTERNAL MICROPHONE LAYOUT */
+#define SPI_SCK_PIN                       GPIO_Pin_13
+#define SPI_SCK_GPIO_PORT                 GPIOB
+#define SPI_SCK_SOURCE                    GPIO_PinSource13
+#define SPI_MOSI_PIN                      GPIO_Pin_15
+#define SPI_MOSI_GPIO_PORT                GPIOB
+#define SPI_MOSI_GPIO_CLK                 RCC_AHB1Periph_GPIOB
+#define SPI_MOSI_SOURCE                   GPIO_PinSource15
+
+#define SPI_SCK_GPIO_CLK                  RCC_AHB1Periph_GPIOB
+#define SPI_SCK_AF                        GPIO_AF_SPI2
 #define SPI_MOSI_AF                       GPIO_AF_SPI2
 
 #define AUDIO_REC_SPI_IRQHANDLER          SPI2_IRQHandler
@@ -112,7 +123,7 @@ uint8_t WaveRecorderStart(uint16_t* pbuf, uint32_t size)
 }
 
 void AUDIO_REC_SPI_IRQHANDLER(void)
-{  
+{
    u16 volume;
    u16 app;
 
@@ -126,7 +137,7 @@ void AUDIO_REC_SPI_IRQHANDLER(void)
     if (InternalBufferSize >= INTERNAL_BUFF_SIZE)
     {
       InternalBufferSize = 0;
-      volume = 100;    
+      volume = 100;
       PDM_Filter_64_LSB((uint8_t *)InternalBuffer, (uint16_t *)pAudioRecBuf, volume , (PDMFilter_InitStruct *)&Filter);
 			// call the callback function in the headphone
       WaveRecorderCallback ((int16_t *) pAudioRecBuf, PCM_OUT_SIZE);

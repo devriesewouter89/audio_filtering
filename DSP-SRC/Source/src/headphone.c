@@ -7,10 +7,13 @@
 
 //Uli Include
 #include "gui_interface_communications.h"
+#include "datalogging.h"
 
 static uint8_t volume = 100;
 extern volatile uint8_t LED_Toggle;
 extern volatile int user_mode;
+extern record_keeper records;
+extern char display_buffer[16];
 
 /*
  * We have three buffers: two output buffers used in a ping-pong arrangement, and an input
@@ -34,48 +37,23 @@ static volatile uint8_t next_buff;              // next output buffer to write
 static void fill_init (void);
 static void fill_buffer (int16_t *buffer, int num_samples);
 
-/*void WaveRecorderCallback (int16_t *buffer, int num_samples)
-{
-    static int clip_timer;
-    int clip = 0, i;
-
-		//1520 is about 0.095 seconds of samples at 16000 samples a second.
-		//I checked audacity and this is about the timespan between silence and the peak of a bark.
-		int16_t silence = buffer[WRAP_BUFFER(mic_head, 1520, num_samples)]; //Get sample from 0.95 seconds ago. Wrap around if that happens to be on the other end.
-    for (i = -1520; i < 0; i++){ // Now that we have our silence, check the preceding 0.095 seconds of samples.
-				int16_t sample = buffer[WRAP_BUFFER(mic_head, i, num_samples)];
-        if (abs(sample)-abs(silence) > 200) //What I'm doing here is calculate the delta between the sample and my reference point. I'm interested in large differences.
-					clip = 1;
-        micbuff[mic_head + i] = sample;
-    }    
-    mic_head = (mic_head + num_samples >= MIC_BUFFER_SAMPLES) ? 0 : mic_head + num_samples;
-    if (clip_timer) {
-        if (!--clip_timer)
-            STM_EVAL_LEDOff(LED5);
-    }
-    else if (clip)
-        STM_EVAL_LEDOn(LED5);
-    if (clip)
-        clip_timer = 500;
-}*/
 void WaveRecorderCallback (int16_t *buffer, int num_samples)
 {
     static int clip_timer;
     int clip = 0, i;
 		if (user_mode & 1) {
-			
 			for (i = 0; i < num_samples; ++i) {
 					int16_t sample = *buffer++;
 					if (sample < 4000 && sample > 3000)// || sample = -20000)
 							clip = 1;
 					micbuff [mic_head + i] = sample;
-			}  
+			}
 		} else {
 			
 			for (i = 0; i < num_samples; ++i) {
 					int16_t sample = *buffer++;
 					if ((sample >= 32000) || (sample <= -32000)) 
-							clip = 1;
+						clip = 1;
 					micbuff [mic_head + i] = sample;
 			}    
 		}
@@ -83,24 +61,42 @@ void WaveRecorderCallback (int16_t *buffer, int num_samples)
     if (clip_timer) {
         if (!--clip_timer)
             STM_EVAL_LEDOff(LED5);
+		
+						//Stores current time.
+						RTC_GetTime(RTC_Format_BIN, &time_struct);
+						RTC_GetDate(RTC_Format_BIN, &date_struct);
+						save_record(&records, time_struct, date_struct);
+						
+						//Resets time to meet Engineering requirement
+						time_struct.RTC_H12     = RTC_H12_AM;
+						time_struct.RTC_Hours   = 0x00;
+						time_struct.RTC_Minutes = 0x00;
+						time_struct.RTC_Seconds = 0x00;
+						RTC_SetTime(RTC_Format_BCD, &time_struct);
+				
+						sprintf(display_buffer, "%3d", records.num_records); 
+						TM_HD44780_Puts(13, 1, display_buffer);
     }
-    else if (clip)
+		//This is called when 
+    else if (clip){
         STM_EVAL_LEDOn(LED5);
+				TM_HD44780_Puts(13, 1, "  *");
+		}
     if (clip)
         clip_timer = 50;
 }
 
 void WavePlayBack(uint32_t AudioFreq)
-{ 
+{
   /* First, we start sampling internal microphone */
   WaveRecorderBeginSampling ();
-
-  /* Initialize wave player (Codec, DMA, I2C) */
+	
+	/* Initialize wave player (Codec, DMA, I2C) */
   WavePlayerInit(SAMPLE_RATE);
-  
+
   /* Initialize the buffer filling function */
   fill_init ();
-
+	
   /* Let the microphone data buffer get 2/3 full (which is 2 playback buffers) */
   while (mic_head < MIC_BUFFER_SAMPLES * 2 / 3);
 
@@ -130,12 +126,13 @@ void WavePlayBack(uint32_t AudioFreq)
  
 int WavePlayerInit(uint32_t AudioFreq)
 { 
+	
   /* Initialize I2S interface */  
   EVAL_AUDIO_SetAudioInterface(AUDIO_INTERFACE_I2S);
-  
+	
   /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOExpander, IOs...) */  
   EVAL_AUDIO_Init(OUTPUT_DEVICE_AUTO, volume, AudioFreq );  
-  
+	
   return 0;
 }
 

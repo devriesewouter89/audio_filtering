@@ -1,5 +1,4 @@
 
-
 #ifndef __MAIN_H
 #define __MAIN_H
 
@@ -14,5 +13,6 @@
 #include "pdm_filter.h"
 #include "stm32f4xx_usart.h"
 #include "display.h"
+#include "tm_stm32f4_adc.h"
 
 #endif

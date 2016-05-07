@@ -14,12 +14,17 @@
 
 /* Private Includes */
 #include "gui_interface_communications.h"
+#include "datalogging.h"
 
 /* Private Variables */
 volatile uint8_t LED_Toggle;
 extern volatile int user_mode;
 
 extern RTC_TimeTypeDef time_struct;
+extern RTC_DateTypeDef date_struct;
+extern record_keeper records;
+extern __IO uint16_t uhADCConvertedValue;
+extern char display_buffer[16];
 
 /**
   * @brief   This function handles NMI exception.
@@ -203,36 +208,37 @@ void EXTI1_IRQHandler(void)
 
 //Interrupt USART Read
 //USART Variables
-extern volatile char USART1_gets[20];
-extern int USART1_read_index;
-void USART1_IRQHandler(void) {
+extern volatile char USART_gets[20];
+extern int USART_read_index;
+void USART2_IRQHandler(void) {
  
 	 static uint16_t RxByte = 0x00;
 	 static uint16_t read_index = 0;
 	 
-	 if (USART_GetITStatus(USART1, USART_IT_TC) == SET)
+	 if (USART_GetITStatus(USART2, USART_IT_TC) == SET)
 	 { 
-		if (USART_GetFlagStatus(USART1, USART_FLAG_TC))
+		if (USART_GetFlagStatus(USART2, USART_FLAG_TC))
 		{
-			USART_SendData(USART1, RxByte);
-			USART_ITConfig(USART1, USART_IT_TC, DISABLE);
+			USART_SendData(USART2, RxByte);
+			USART_ITConfig(USART2, USART_IT_TC, DISABLE);
 		} 
-		USART_ClearITPendingBit(USART1, USART_IT_TC);
+		USART_ClearITPendingBit(USART2, USART_IT_TC);
 	}
 	 
-	 if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET)
+	 if (USART_GetITStatus(USART2, USART_IT_RXNE) == SET)
 	 {
 		 
-		RxByte = USART_ReceiveData(USART1);
-		if( RxByte != '\n' && read_index < sizeof(USART1_gets) ){
-			USART1_gets[read_index++] = RxByte;
+		RxByte = USART_ReceiveData(USART2);
+		if( RxByte != '\n' && read_index < sizeof(USART_gets) ){
+			USART_gets[read_index++] = RxByte;
 		}else{
-			handle_USART_message(USART1_gets);
+			USART_gets[read_index++] = '\n';
+			handle_USART_message(USART_gets);
 			read_index = 0;
 		}
 			
-		USART_ITConfig(USART1, USART_IT_TC, ENABLE);
-		USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+		USART_ITConfig(USART2, USART_IT_TC, ENABLE);
+		USART_ClearITPendingBit(USART2, USART_IT_RXNE);
 	 }
 }
 /**
@@ -280,16 +286,39 @@ void EXTI0_IRQHandler(void)
   */
 void RTC_Alarm_IRQHandler(void)
 {
+	uint32_t result;
+	
 	if( RTC_GetITStatus(RTC_IT_ALRA) != RESET ){
-		char time_buffer[50];
+		//Update Time
 		RTC_GetTime(RTC_Format_BIN, &time_struct);
-		sprintf(time_buffer, "%02d:%02d:%02d\n", time_struct.RTC_Hours, time_struct.RTC_Minutes, time_struct.RTC_Seconds);
-		USART_puts(time_buffer);
+		sprintf(display_buffer, "%2d:%2d:%2d", time_struct.RTC_Hours, time_struct.RTC_Minutes, time_struct.RTC_Seconds);
+		TM_HD44780_Puts(0, 1, display_buffer);
 		
-		STM_EVAL_LEDToggle(LED3);
+		//Update Date
+		RTC_GetDate(RTC_Format_BIN, &date_struct);
+		sprintf(display_buffer, "%d/%d/%4d", date_struct.RTC_Date, date_struct.RTC_Month, date_struct.RTC_Year+1970);
+		TM_HD44780_Puts(0, 0, display_buffer);
+		
+		//Check Vbat
+		
+		/* Convert to voltage */
+		result = TM_ADC_Read(ADC1, ADC_Channel_1);
+		result = result * 2 * 3000 / 0xFFF; //These come from TM_ADC_ReadVbat.
+		sprintf(display_buffer, "%3d", result/10);
+		TM_HD44780_Puts(12, 1, display_buffer);
+		
+		/*
+		if( result <= 4080){
+			TM_HD44780_Puts(14, 0, "BL");
+		}else if( result >= 4200){
+			TM_HD44780_Puts(14, 0, "  ");
+		}*/
+		
+		STM_EVAL_LEDToggle(LED6);
 		RTC_ClearITPendingBit(RTC_IT_ALRA);
 		EXTI_ClearITPendingBit(EXTI_Line17);
 	}
+	
 }
 
 /**

@@ -308,14 +308,15 @@ void EVAL_AUDIO_SetAudioInterface(uint32_t Interface)
   * @retval 0 if correct communication, else wrong communication
   */
 uint32_t EVAL_AUDIO_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq)
-{    
+{ 
   /* Perform low layer Codec initialization */
   if (Codec_Init(OutputDevice, VOLUME_CONVERT(Volume), AudioFreq) != 0)
   {
     return 1;                
   }
   else
-  {    
+  {
+	
     /* I2S data transfer preparation:
     Prepare the Media to be used for the audio transfer from memory to I2S peripheral */
     Audio_MAL_Init();
@@ -609,14 +610,14 @@ static uint32_t Codec_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t Audio
   uint32_t counter = 0; 
 
   /* Configure the Codec related IOs */
-  Codec_GPIO_Init();   
-  
+  Codec_GPIO_Init();
+	
   /* Reset the Codec Registers */
   Codec_Reset();
-
+	
   /* Initialize the Control interface of the Audio Codec */
   Codec_CtrlInterface_Init();     
-  
+
   /* Keep Codec powered OFF */
   counter += Codec_WriteRegister(0x02, 0x01);  
       
@@ -631,7 +632,7 @@ static uint32_t Codec_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t Audio
       
   /* Set the Master volume */
   Codec_VolumeCtrl(Volume);
-  
+  	
   if (CurrAudioInterface == AUDIO_INTERFACE_DAC)
   {
     /* Enable the PassThrough on AIN1A and AIN1B */
@@ -1169,7 +1170,7 @@ static void Codec_AudioInterface_DeInit(void)
 static void Codec_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
-  
+
   /* Enable Reset GPIO Clock */
   RCC_AHB1PeriphClockCmd(AUDIO_RESET_GPIO_CLK,ENABLE);
   
@@ -1180,29 +1181,30 @@ static void Codec_GPIO_Init(void)
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_NOPULL;
   GPIO_Init(AUDIO_RESET_GPIO, &GPIO_InitStructure);    
-  
+		
   /* Enable I2S and I2C GPIO clocks */
   RCC_AHB1PeriphClockCmd(CODEC_I2C_GPIO_CLOCK | CODEC_I2S_GPIO_CLOCK, ENABLE);
-
+	
   /* CODEC_I2C SCL and SDA pins configuration -------------------------------------*/
   GPIO_InitStructure.GPIO_Pin = CODEC_I2C_SCL_PIN | CODEC_I2C_SDA_PIN; 
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
   GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_NOPULL;
-  GPIO_Init(CODEC_I2C_GPIO, &GPIO_InitStructure);     
+  GPIO_Init(CODEC_I2C_GPIO, &GPIO_InitStructure);
+	
   /* Connect pins to I2C peripheral */
-  GPIO_PinAFConfig(CODEC_I2C_GPIO, CODEC_I2S_SCL_PINSRC, CODEC_I2C_GPIO_AF);  
+  GPIO_PinAFConfig(CODEC_I2C_GPIO, CODEC_I2S_SCL_PINSRC, CODEC_I2C_GPIO_AF);
   GPIO_PinAFConfig(CODEC_I2C_GPIO, CODEC_I2S_SDA_PINSRC, CODEC_I2C_GPIO_AF);  
-
+	
   /* CODEC_I2S pins configuration: WS, SCK and SD pins -----------------------------*/
   GPIO_InitStructure.GPIO_Pin = CODEC_I2S_SCK_PIN | CODEC_I2S_SD_PIN; 
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-  GPIO_Init(CODEC_I2S_GPIO, &GPIO_InitStructure);
-  
+	GPIO_Init(CODEC_I2S_GPIO, &GPIO_InitStructure);
+		
   /* Connect pins to I2S peripheral  */
   GPIO_PinAFConfig(CODEC_I2S_WS_GPIO, CODEC_I2S_WS_PINSRC, CODEC_I2S_GPIO_AF);  
   GPIO_PinAFConfig(CODEC_I2S_GPIO, CODEC_I2S_SCK_PINSRC, CODEC_I2S_GPIO_AF);
